@@ -1,5 +1,2 @@
 # BomberGirl
 
-abc
-
-asdfasdf
