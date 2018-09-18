@@ -15,7 +15,7 @@
  * @version 1.0.0
  */
 
-namespace PushWebSocket;
+namespace ch;
 
 class Client {
 

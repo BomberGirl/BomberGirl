@@ -15,7 +15,7 @@
  * @version 1.0.0
  */
 
-namespace PushWebSocket;
+namespace ch;
 
 class Server {
 
@@ -49,6 +49,10 @@ class Server {
 	 */
 	private $clients;
 
+    /**
+     * @var Client
+     */
+	private $lastClient;
 	/**
 	 * If true, the server will print messages to the terminal
 	 * @var Boolean
@@ -93,10 +97,17 @@ class Server {
 	 */
 	private function connect($socket) {
 		$this->console("Creating client...");
-		$client = new \PushWebSocket\Client(uniqid(), $socket);
+		$client = new Client(uniqid(), $socket);
 		$this->clients[] = $client;
 		$this->sockets[] = $socket;
 		$this->console("Client #{$client->getId()} is successfully created!");
+		if($this->lastClient){
+			$this->lastClient = $client;
+		} else {
+			$this->lastClient->opponent = $client;
+			$client->opponent = $this->lastClient;
+			$this->lastClient = null;
+		}
 	}
 
 	/**
@@ -217,9 +228,18 @@ class Server {
 	}
 
     /**
-     * send info to player 1 and player 2
+     * @param $client Client
      */
-	private function sendToPlayers(){
+	private function sendToPlayers($client1){
+
+		$client2 = $client1->opponent;
+		$client2 = $this->getClientById($client2);
+
+		$this->send($client1, "u:" . $client1->positionY . ", " . $client1->positionX . ";" . $client1->lifes);
+		$this->send($client1, "nu:" . $client2->positionY . ", " . $client2->positionX . ";" . $client2->lifes);
+		$this->send($client2, "u:" . $client2->positionY . ", " . $client2->positionX . ";" . $client2->lifes);
+		$this->send($client2, "nu:" . $client1->positionY . ", " . $client1->positionX . ";" . $client1->lifes);
+		echo "Info sendet";
 
 	}
 
