@@ -191,7 +191,21 @@ class Server {
 	private function getClientBySocket($socket) {
 		foreach($this->clients as $client)
 			if($client->getSocket() == $socket) {
-				$this->console("Client found");
+				$this->console("Client found by Socket");
+				return $client;
+			}
+		return false;
+	}
+
+    /**
+	 * Get the client by ID
+     * @param $id
+     * @return bool
+     */
+	private function getClientById($id){
+		foreach ($this->clients as $client)
+			if ($client->getId() == $id){
+				$this->console("Client found by ID");
 				return $client;
 			}
 		return false;
