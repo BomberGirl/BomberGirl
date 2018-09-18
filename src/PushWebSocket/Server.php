@@ -203,14 +203,24 @@ class Server {
 	 * @param $action
 	 */
 	private function action($client, $action) {
-		
-		$action = $this->unmask($action);
-		$this->console("Performing action: ".$action);
-		if($action == "exit" || $action == "quit") {
-			$this->console("Killing a child process");
-			posix_kill($client->getPid(), SIGTERM);
-			$this->console("Process {$client->getPid()} is killed!");
-		}
+        $action = $this->unmask($action);
+        echo $action;
+        if($action == "up"){
+            $client->positionX--;
+        } else if($action == "down"){
+            $client->positionX++;
+        } else if($action == "left"){
+            $client->positionY--;
+        } else if($action == "right"){
+            $client->positionY++;
+        }
+	}
+
+    /**
+     * send info to player 1 and player 2
+     */
+	private function sendToPlayers(){
+
 	}
 
 	/**

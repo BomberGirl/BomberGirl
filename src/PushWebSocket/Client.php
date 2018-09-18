@@ -18,6 +18,12 @@
 namespace PushWebSocket;
 
 class Client {
+
+    public $positionX;
+    public $positionY;
+    public $lifes;
+    public $opponent;
+
 	private $id;
 	private $socket;
 	private $handshake;
