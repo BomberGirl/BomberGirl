@@ -207,6 +207,20 @@ class Server {
 			}
 		return false;
 	}
+	
+    /**
+     * Get the client by ID
+     * @param $id
+     * @return bool
+     */
+    private function getClientById($id){
+        foreach ($this->clients as $client)
+            if ($client->getId() == $id){
+                $this->console("Client found by ID");
+                return $client;
+            }
+        return false;
+    }
 
 	/**
 	 * Do an action
