@@ -254,7 +254,6 @@ class Server {
 		$this->send($client2, "u:" . $client2->positionY . ", " . $client2->positionX . ";" . $client2->lifes);
 		$this->send($client2, "nu:" . $client1->positionY . ", " . $client1->positionX . ";" . $client1->lifes);
 		echo "Info sendet";
-
 	}
 
 	/**
