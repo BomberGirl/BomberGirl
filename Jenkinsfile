@@ -6,18 +6,14 @@ pipeline {
         echo 'Long'
       }
     }
-    stage('error') {
-      parallel {
-        stage('error') {
-          steps {
-            echo 'It works!'
-          }
-        }
-        stage('error') {
-          steps {
-            bat(encoding: 'utf-8', script: './gradlew clean build --refresh-dependencies --stacktrace')
-          }
-        }
+    stage('textprinting') {
+      steps {
+        echo 'It works!'
+      }
+    }
+    stage('mailing') {
+      steps {
+        mail(subject: 'Test', body: 'This is a test', charset: 'utf-8', from: 'jens.scheidmann@gmail.com', to: 'jens.scheidmann@nyp.ch')
       }
     }
   }
