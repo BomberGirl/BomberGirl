@@ -13,9 +13,9 @@ pipeline {
             echo 'It works!'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
-            bat(encoding: 'utf-8', script: './gradlew gradle clean gradle build')
+            bat(encoding: 'utf-8', script: './gradlew clean build --refresh-dependencies --stacktrace')
           }
         }
       }
