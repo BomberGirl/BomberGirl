@@ -6,5 +6,10 @@ pipeline {
         echo 'Long'
       }
     }
+    stage('') {
+      steps {
+        echo 'It works!'
+      }
+    }
   }
 }
